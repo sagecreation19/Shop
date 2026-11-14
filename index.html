@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Selena — Premium Indian Jewellery & Sarees</title>
-<meta name="description" content="Discover timeless jewellery and beautifully crafted sarees for every occasion at Selena.">
+<title>Alankrita — Premium Indian Jewellery & Sarees</title>
+<meta name="description" content="Discover timeless jewellery and beautifully crafted sarees for every occasion at Alankrita.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -1636,6 +1636,507 @@ ul { list-style: none; }
   .lotus-accent { width: 36px; }
 }
 
+/* ===== CHECKOUT OVERLAY ===== */
+.checkout-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(51,48,46,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.checkout-overlay.show { display: flex; }
+
+.checkout-container {
+  background: var(--bg-primary);
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  border-radius: 16px;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(51,48,46,0.25);
+  position: relative;
+}
+
+.checkout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg-primary);
+  z-index: 2;
+}
+.checkout-header h2 {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.checkout-close {
+  width: 36px; height: 36px;
+  border: none; background: none;
+  cursor: pointer; color: var(--text-light);
+  transition: var(--transition);
+  display: flex; align-items: center; justify-content: center;
+}
+.checkout-close:hover { color: var(--text); }
+
+.checkout-body { padding: 24px; }
+
+/* Order Summary */
+.checkout-order-id {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(182,154,105,0.08);
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+}
+.checkout-order-id .label { color: var(--text-light); font-family: var(--sans); }
+.checkout-order-id .value { font-weight: 600; color: var(--accent); font-family: var(--sans); letter-spacing: 0.02em; }
+
+.checkout-section-title {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.checkout-section-title svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; }
+
+.checkout-items {
+  margin-bottom: 20px;
+}
+.checkout-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(182,154,105,0.12);
+  font-size: 0.88rem;
+}
+.checkout-item:last-child { border-bottom: none; }
+.checkout-item-name {
+  flex: 1;
+  color: var(--text);
+  font-family: var(--sans);
+}
+.checkout-item-qty {
+  color: var(--text-light);
+  font-size: 0.8rem;
+  margin: 0 12px;
+  font-family: var(--sans);
+}
+.checkout-item-price {
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--sans);
+}
+
+.checkout-summary-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 0.88rem;
+  color: var(--text-light);
+  font-family: var(--sans);
+}
+.checkout-summary-line.total {
+  border-top: 2px solid var(--accent);
+  margin-top: 8px;
+  padding-top: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+.checkout-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 20px 0;
+}
+
+/* Delivery Address */
+.checkout-address-form {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.checkout-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  background: var(--white);
+  color: var(--text);
+  transition: var(--transition);
+  box-sizing: border-box;
+}
+.checkout-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(182,154,105,0.15);
+}
+.checkout-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Payment Methods */
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.payment-method {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  background: var(--white);
+}
+.payment-method:hover { border-color: var(--accent); }
+.payment-method.selected {
+  border-color: var(--accent);
+  background: rgba(182,154,105,0.06);
+  box-shadow: 0 0 0 3px rgba(182,154,105,0.12);
+}
+.payment-radio {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.payment-method.selected .payment-radio {
+  border-color: var(--accent);
+}
+.payment-radio::after {
+  content: '';
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  transition: var(--transition);
+}
+.payment-method.selected .payment-radio::after { transform: scale(1); }
+.payment-method-icon {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  background: rgba(182,154,105,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.payment-method-icon svg { width: 22px; height: 22px; color: var(--accent); }
+.payment-method-info { flex: 1; }
+.payment-method-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text);
+  font-family: var(--sans);
+}
+.payment-method-desc {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-top: 2px;
+  font-family: var(--sans);
+}
+
+/* UPI Input */
+.upi-input-area {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: rgba(182,154,105,0.04);
+  border-radius: 8px;
+  display: none;
+}
+.upi-input-area.show { display: block; }
+.upi-input-area label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-family: var(--sans);
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Net Banking Select */
+.netbanking-area {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: rgba(182,154,105,0.04);
+  border-radius: 8px;
+  display: none;
+}
+.netbanking-area.show { display: block; }
+.netbanking-area label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-family: var(--sans);
+  display: block;
+  margin-bottom: 6px;
+}
+.netbanking-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  background: var(--white);
+  color: var(--text);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Checkout Actions */
+.checkout-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.checkout-pay-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.checkout-pay-btn:hover { background: var(--accent-hover); }
+.checkout-pay-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.checkout-pay-btn svg { width: 18px; height: 18px; }
+
+.checkout-cancel-btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: #C0392B;
+  border: 1.5px solid #C0392B;
+  border-radius: 10px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.checkout-cancel-btn:hover {
+  background: rgba(192,57,43,0.06);
+}
+
+.checkout-secure-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  font-family: var(--sans);
+}
+.checkout-secure-note svg { width: 14px; height: 14px; }
+
+/* Cancel Confirmation Dialog */
+.cancel-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(51,48,46,0.6);
+  z-index: 10001;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.cancel-confirm-overlay.show { display: flex; }
+.cancel-confirm-box {
+  background: var(--bg-primary);
+  padding: 32px;
+  border-radius: 16px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(51,48,46,0.3);
+}
+.cancel-confirm-icon {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(192,57,43,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.cancel-confirm-icon svg { width: 28px; height: 28px; color: #C0392B; }
+.cancel-confirm-box h3 {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.cancel-confirm-box p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 24px;
+  font-family: var(--sans);
+  line-height: 1.5;
+}
+.cancel-confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cancel-yes-btn {
+  padding: 12px;
+  background: #C0392B;
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cancel-yes-btn:hover { background: #A93226; }
+.cancel-no-btn {
+  padding: 12px;
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.cancel-no-btn:hover { background: rgba(182,154,105,0.06); }
+
+/* Payment Status Screen */
+.payment-status-screen {
+  display: none;
+  text-align: center;
+  padding: 40px 24px;
+}
+.payment-status-screen.show { display: block; }
+.status-icon {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.status-icon.success { background: rgba(39,174,96,0.12); }
+.status-icon.failed { background: rgba(192,57,43,0.12); }
+.status-icon.pending { background: rgba(243,156,18,0.12); }
+.status-icon.cancelled { background: rgba(149,165,166,0.12); }
+.status-icon svg { width: 40px; height: 40px; }
+.status-icon.success svg { color: #27AE60; }
+.status-icon.failed svg { color: #C0392B; }
+.status-icon.pending svg { color: #F39C12; }
+.status-icon.cancelled svg { color: #95A5A6; }
+.payment-status-screen h3 {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.payment-status-screen .status-msg {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  font-family: var(--sans);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.payment-status-screen .status-order {
+  font-size: 0.82rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 24px;
+  font-family: var(--sans);
+}
+.status-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.status-btn-primary {
+  padding: 12px;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.status-btn-primary:hover { background: var(--accent-hover); }
+.status-btn-outline {
+  padding: 10px;
+  background: transparent;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.status-btn-outline:hover { background: rgba(182,154,105,0.06); }
+
+@media(max-width:480px) {
+  .checkout-container { border-radius: 12px; }
+  .checkout-body { padding: 16px; }
+  .checkout-input-row { grid-template-columns: 1fr; }
+  .payment-method { padding: 12px; }
+  .cancel-confirm-box { padding: 24px; }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .product-grid { grid-template-columns: repeat(3, 1fr); }
@@ -2045,7 +2546,7 @@ ul { list-style: none; }
           <span></span><span></span><span></span>
         </button>
       </div>
-      <a href="javascript:void(0)" class="logo" onclick="goHome()">Selena</a>
+      <a href="javascript:void(0)" class="logo" onclick="goHome()">Alankrita</a>
       <div class="header-icons">
         <button class="header-icon" aria-label="Search" onclick="openSearch()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
@@ -2222,7 +2723,7 @@ ul { list-style: none; }
   <svg class="promo-diya right" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="46" rx="15" ry="6" fill="#B69A69" opacity="0.4"/><path d="M20 46 C20 38 18 30 30 27 C42 30 40 38 40 46Z" fill="#B69A69"/><ellipse cx="30" cy="27" rx="4.5" ry="3.5" fill="#E9D9D8"/><path d="M30 27 C27.5 18 27 12 30 4 C33 12 32.5 18 30 27Z" fill="#D4A843" opacity="0.9"/><circle cx="30" cy="9" r="2.5" fill="#E9D9D8" opacity="0.4"/></svg>
   <div class="container">
     <div class="promo-content">
-      <p class="promo-eyebrow">Selena Collection</p>
+      <p class="promo-eyebrow">Alankrita Collection</p>
       <h2 class="promo-title">A Celebration of Timeless Beauty</h2>
       <p class="promo-subtitle">Discover pieces that make every occasion unforgettable.</p>
       <a href="javascript:void(0)" class="btn-primary" onclick="switchTab('collections')">Explore the Collection</a>
@@ -2264,7 +2765,7 @@ ul { list-style: none; }
       <div class="brand-story-content">
         <p class="hero-eyebrow" style="text-align:left">Our Story</p>
         <h2>Tradition Meets Timeless Elegance</h2>
-        <p>At Selena, we believe that every piece of jewellery and every drape of a saree tells a story — of craftsmanship passed through generations, of celebrations that bring families together, and of the quiet confidence that comes from wearing something truly beautiful.</p>
+        <p>At Alankrita, we believe that every piece of jewellery and every drape of a saree tells a story — of craftsmanship passed through generations, of celebrations that bring families together, and of the quiet confidence that comes from wearing something truly beautiful.</p>
         <p>Our collections are thoughtfully curated to honour India's rich textile and jewellery heritage while embracing contemporary design sensibilities. Each piece is crafted with care, ensuring that quality and elegance remain at the heart of everything we offer.</p>
         <p style="font-size:0.8rem; color:var(--text-light); font-style:italic; margin-top:8px;">[Replace with your brand photograph and story]</p>
       </div>
@@ -2350,7 +2851,7 @@ ul { list-style: none; }
     <div class="contact-grid">
       <!-- Help Categories -->
       <div class="contact-help">
-        <h3>Selena Help Center</h3>
+        <h3>Alankrita Help Center</h3>
         <p class="help-subtitle">24×7 Customer Care Support</p>
         <div class="help-list">
           <div class="help-item" onclick="openPolicy('help-issues')">
@@ -2586,7 +3087,7 @@ ul { list-style: none; }
     Back to Home
   </button>
   <div class="page-hero">
-    <h1>About Selena</h1>
+    <h1>About Alankrita</h1>
     <p>Our story of tradition, craftsmanship and timeless beauty</p>
     <div class="accent-line"></div>
   </div>
@@ -2598,7 +3099,7 @@ ul { list-style: none; }
         </div>
         <div class="about-text">
           <h2>Our Story</h2>
-          <p>Selena was born from a deep love for India&#39;s artistic heritage. We believe that jewellery and sarees are more than accessories — they are expressions of identity, celebrations of craft, and bridges between generations.</p>
+          <p>Alankrita was born from a deep love for India&#39;s artistic heritage. We believe that jewellery and sarees are more than accessories — they are expressions of identity, celebrations of craft, and bridges between generations.</p>
           <p>Every piece in our collection is carefully sourced from skilled artisans across India, from the silk weavers of Kanchipuram to the kundan craftsmen of Rajasthan. We work directly with these talented makers, ensuring fair practices and preserving the traditions that make each creation unique.</p>
           <p style="font-size:0.8rem; color:var(--text-light); font-style:italic; margin-top:8px;">[Replace with your brand photograph and story]</p>
         </div>
@@ -2656,7 +3157,7 @@ ul { list-style: none; }
         <h3>Get in Touch</h3>
         <div class="contact-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <p><a href="mailto:support@selena.com" contenteditable="true">support@selena.com</a><br><span style="font-size:0.78rem;color:var(--text-light);font-style:italic">[Click to edit email]</span></p>
+          <p><a href="mailto:support@alankrita.com" contenteditable="true">support@alankrita.com</a><br><span style="font-size:0.78rem;color:var(--text-light);font-style:italic">[Click to edit email]</span></p>
         </div>
         <div class="contact-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
@@ -2671,7 +3172,7 @@ ul { list-style: none; }
           <p>Mon – Sat: 10 AM – 8 PM<br>Sunday: 11 AM – 6 PM</p>
         </div>
         <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border)">
-          <h3 style="margin-bottom:16px">Selena Help Centre</h3>
+          <h3 style="margin-bottom:16px">Alankrita Help Centre</h3>
           <button class="btn-outline" style="padding:10px 20px;font-size:0.72rem;margin:4px" onclick="openPolicy('help-issues')">Help with Issues</button>
           <button class="btn-outline" style="padding:10px 20px;font-size:0.72rem;margin:4px" onclick="openPolicy('help-order')">Help with Orders</button>
           <button class="btn-outline" style="padding:10px 20px;font-size:0.72rem;margin:4px" onclick="openPolicy('help-other')">Other Issues</button>
@@ -2730,7 +3231,7 @@ ul { list-style: none; }
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="javascript:void(0)" class="logo" onclick="goHome()">Selena</a>
+        <a href="javascript:void(0)" class="logo" onclick="goHome()">Alankrita</a>
         <p>Premium Indian jewellery and sarees crafted for weddings, festivals, celebrations, gifting and everyday elegance.</p>
         <div class="footer-social">
           <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
@@ -2775,7 +3276,7 @@ ul { list-style: none; }
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2026 Selena. All rights reserved. &nbsp;|&nbsp; Prices in ₹ (INR)
+      &copy; 2026 Alankrita. All rights reserved. &nbsp;|&nbsp; Prices in ₹ (INR)
     </div>
   </div>
 </footer>
@@ -2821,7 +3322,7 @@ ul { list-style: none; }
     <button class="policy-close" onclick="closePolicy()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
   <div class="policy-body">
-    <p>At Selena, we believe that every purchase deserves a beautiful experience, from the moment you place your order until it reaches your doorstep.</p>
+    <p>At Alankrita, we believe that every purchase deserves a beautiful experience, from the moment you place your order until it reaches your doorstep.</p>
     <p>We carefully prepare and package every jewellery piece and saree to help ensure it reaches you safely.</p>
     <h3>Order Processing</h3>
     <ul>
@@ -2844,7 +3345,7 @@ ul { list-style: none; }
     <p>If you receive a damaged, defective or incorrect product, please contact our support team within 48 hours of delivery with your order number, photographs and an unboxing video.</p>
     <h3>Contact Us</h3>
     <p>For shipping-related questions, please contact us through our official customer support channels.</p>
-    <p>Thank you for shopping with Selena.</p>
+    <p>Thank you for shopping with Alankrita.</p>
   </div>
 </div>
 
@@ -2855,7 +3356,7 @@ ul { list-style: none; }
     <button class="policy-close" onclick="closePolicy()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
   <div class="policy-body">
-    <p>At Selena, customer satisfaction is important to us. We want every purchase to bring you joy and confidence. Please read our return and exchange guidelines before placing your order.</p>
+    <p>At Alankrita, customer satisfaction is important to us. We want every purchase to bring you joy and confidence. Please read our return and exchange guidelines carefully before placing your order.</p>
     <h3>Return Eligibility</h3>
     <p>Returns may be accepted under the following circumstances:</p>
     <ul>
@@ -2863,37 +3364,57 @@ ul { list-style: none; }
       <li>You receive an incorrect item.</li>
       <li>The product has a verified quality issue.</li>
     </ul>
-    <p>Please report such issues within 48 hours of receiving your order.</p>
+    <p>All such issues must be reported within 48 hours of receiving your order.</p>
+    <h3>Mandatory Unboxing Video Requirement</h3>
+    <p>Recording a continuous, clear unboxing video of your order is <strong>mandatory</strong> for any return or exchange request.</p>
+    <ul>
+      <li>Customers must record a video while opening their package, starting from the sealed parcel.</li>
+      <li>The video must clearly show the package condition, opening process, and the received product.</li>
+      <li>The product and any damage, defect, or incorrect item must be clearly visible.</li>
+      <li>The video must be unedited and uninterrupted to be considered valid.</li>
+      <li>The unboxing video must be submitted along with the return or exchange request.</li>
+    </ul>
+    <p><strong>Important:</strong> Return or exchange requests without a valid unboxing video may not be accepted. Customers are strongly advised to record their unboxing video before opening or using the product.</p>
     <h3>Exchange Policy</h3>
     <p>Exchange requests may be considered for eligible products, subject to product availability and inspection.</p>
+    <p>A valid unboxing video is compulsory for all exchange requests.</p>
     <h3>Non-Returnable Items</h3>
     <p>For hygiene and product-quality reasons, certain items may not be eligible for return or exchange, including:</p>
     <ul>
       <li>Earrings and other eligible intimate-contact jewellery.</li>
       <li>Products marked as Final Sale.</li>
       <li>Customised or personalised products.</li>
-      <li>Products showing signs of use, damage or alteration caused after delivery.</li>
+      <li>Products showing signs of use, damage, or alteration caused after delivery.</li>
     </ul>
     <p>Sarees and other eligible products will be assessed according to their condition and the applicable return terms.</p>
     <h3>Conditions for Returns</h3>
     <ul>
       <li>Products must be unused and in their original condition.</li>
-      <li>Original packaging, tags and accessories must be retained.</li>
+      <li>Original packaging, tags, and accessories must be retained.</li>
       <li>Proof of purchase or order details must be provided.</li>
-      <li>A clear unboxing video may be requested for damage or incorrect-item claims.</li>
+      <li>A clear, continuous, and unedited unboxing video is mandatory.</li>
+      <li>All return or exchange claims must be submitted within 48 hours of delivery.</li>
     </ul>
-    <h3>Refunds</h3>
-    <p>Approved refunds will be processed through the applicable payment method, subject to payment-provider processing timelines.</p>
-    <h3>How to Request a Return</h3>
-    <p>Contact our customer support team with:</p>
+    <h3>Replacement Policy (No Cash Refunds)</h3>
+    <p><strong>Alankrita does not offer cash refunds or monetary reimbursements for returned products.</strong></p>
+    <ul>
+      <li>Once a return request is approved after product inspection and verification of the submitted evidence, the customer will receive a replacement of the same product.</li>
+      <li>Replacement is subject to product availability.</li>
+      <li>No cash refunds, bank transfers, or payment reversals will be provided.</li>
+      <li>The replacement will be processed after the returned product has been received and inspected by our team.</li>
+    </ul>
+    <p><strong>Please Note:</strong> Alankrita follows a replacement-only policy. Customers are eligible for a replacement of the same product, not a monetary refund or exchange for a different product.</p>
+    <h3>How to Request a Return or Exchange</h3>
+    <p>Contact our customer support team with the following details:</p>
     <ul>
       <li>Order ID.</li>
       <li>Product name.</li>
       <li>Reason for return or exchange.</li>
-      <li>Supporting photographs or video.</li>
+      <li>Mandatory unboxing video.</li>
+      <li>Supporting photographs, if applicable.</li>
     </ul>
     <p>Our team will review your request and guide you through the next steps.</p>
-    <p>We reserve the right to decline requests that do not meet the applicable return conditions.</p>
+    <p>Alankrita reserves the right to decline return or exchange requests that do not meet the applicable eligibility requirements, including requests submitted without the mandatory unboxing video.</p>
   </div>
 </div>
 
@@ -2904,7 +3425,7 @@ ul { list-style: none; }
     <button class="policy-close" onclick="closePolicy()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
   <div class="policy-body">
-    <p>At Selena, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use and protect information when you visit our website or purchase our products.</p>
+    <p>At Alankrita, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use and protect information when you visit our website or purchase our products.</p>
     <h3>Information We Collect</h3>
     <p>When you browse or shop with us, we may collect:</p>
     <ul>
@@ -2947,7 +3468,7 @@ ul { list-style: none; }
     <button class="policy-close" onclick="closePolicy()" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
   </div>
   <div class="policy-body">
-    <p>Welcome to Selena. By accessing or purchasing from our website, you agree to the following Terms &amp; Conditions. Please read them carefully before using our services.</p>
+    <p>Welcome to Alankrita. By accessing or purchasing from our website, you agree to the following Terms &amp; Conditions. Please read them carefully before using our services.</p>
     <h3>1. Website Usage</h3>
     <p>You agree to use our website for lawful purposes and provide accurate information when placing an order or creating an account.</p>
     <h3>2. Products &amp; Descriptions</h3>
@@ -2966,7 +3487,7 @@ ul { list-style: none; }
     <h3>6. Returns &amp; Exchanges</h3>
     <p>All return and exchange requests are governed by our Return &amp; Exchange Policy. Please review the policy before purchasing.</p>
     <h3>7. Intellectual Property</h3>
-    <p>All website content, including photographs, graphics, logos, designs, text and branding, belongs to Selena or its respective rights holders. Unauthorised copying, reproduction or commercial use is prohibited.</p>
+    <p>All website content, including photographs, graphics, logos, designs, text and branding, belongs to Alankrita or its respective rights holders. Unauthorised copying, reproduction or commercial use is prohibited.</p>
     <h3>8. Limitation of Liability</h3>
     <p>We are not responsible for delays or service interruptions caused by circumstances beyond our reasonable control, subject to applicable law. Nothing in these Terms excludes any consumer rights that cannot legally be excluded.</p>
     <h3>9. Changes to Terms</h3>
@@ -3187,7 +3708,7 @@ ul { list-style: none; }
       <span class="label">Subtotal</span>
       <span class="amount" id="cart-subtotal">₹0</span>
     </div>
-    <a href="javascript:void(0)" class="btn-primary" onclick="showToast('Checkout coming soon')">Proceed to Checkout</a>
+    <a href="javascript:void(0)" class="btn-primary" onclick="openCheckout()">Proceed to Checkout</a>
     <a href="javascript:void(0)" class="btn-outline" onclick="closeCart()">Continue Shopping</a>
   </div>
 </div>
@@ -3204,6 +3725,199 @@ ul { list-style: none; }
     <div class="cart-empty">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 21C12 21 3 13.5 3 8.5C3 5.42 5.42 3 8.5 3C10.24 3 11.91 3.81 12 5C12.09 3.81 13.76 3 15.5 3C18.58 3 21 5.42 21 8.5C21 13.5 12 21 12 21Z"/></svg>
       <p>Your wishlist is empty</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHECKOUT OVERLAY ===== -->
+<div class="checkout-overlay" id="checkout-overlay">
+  <div class="checkout-container">
+    <div class="checkout-header">
+      <h2>Checkout</h2>
+      <button class="checkout-close" onclick="closeCheckout()" aria-label="Close checkout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Checkout Form -->
+    <div class="checkout-body" id="checkout-form-view">
+      <div class="checkout-order-id">
+        <span class="label">Order ID</span>
+        <span class="value" id="checkout-order-id">ALK-000000</span>
+      </div>
+
+      <!-- Order Items -->
+      <div class="checkout-section-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Order Summary
+      </div>
+      <div class="checkout-items" id="checkout-items"></div>
+      <div class="checkout-summary-line">
+        <span>Subtotal</span>
+        <span id="checkout-subtotal">₹0</span>
+      </div>
+      <div class="checkout-summary-line">
+        <span>Shipping</span>
+        <span id="checkout-shipping">FREE</span>
+      </div>
+      <div class="checkout-summary-line total">
+        <span>Total Payable</span>
+        <span id="checkout-total">₹0</span>
+      </div>
+
+      <div class="checkout-divider"></div>
+
+      <!-- Delivery Address -->
+      <div class="checkout-section-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Delivery Address
+      </div>
+      <div class="checkout-address-form">
+        <input type="text" class="checkout-input" id="checkout-name" placeholder="Full Name" />
+        <input type="tel" class="checkout-input" id="checkout-phone" placeholder="Phone Number" />
+        <input type="text" class="checkout-input" id="checkout-address" placeholder="Address (House No, Street, Locality)" />
+        <div class="checkout-input-row">
+          <input type="text" class="checkout-input" id="checkout-city" placeholder="City" />
+          <input type="text" class="checkout-input" id="checkout-pincode" placeholder="Pincode" />
+        </div>
+        <input type="text" class="checkout-input" id="checkout-state" placeholder="State" />
+      </div>
+
+      <div class="checkout-divider"></div>
+
+      <!-- Payment Method Selection -->
+      <div class="checkout-section-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Payment Method
+      </div>
+
+      <div class="payment-methods">
+        <!-- UPI -->
+        <div class="payment-method selected" onclick="selectPaymentMethod('upi')">
+          <div class="payment-radio"></div>
+          <div class="payment-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="payment-method-info">
+            <div class="payment-method-name">Pay by Any UPI ID</div>
+            <div class="payment-method-desc">Google Pay, PhonePe, Paytm & more</div>
+          </div>
+        </div>
+        <div class="upi-input-area show" id="upi-input-area">
+          <label>Enter your UPI ID</label>
+          <input type="text" class="checkout-input" id="checkout-upi" placeholder="yourname@upi" />
+        </div>
+
+        <!-- Net Banking -->
+        <div class="payment-method" onclick="selectPaymentMethod('netbanking')">
+          <div class="payment-radio"></div>
+          <div class="payment-method-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/></svg>
+          </div>
+          <div class="payment-method-info">
+            <div class="payment-method-name">Net Banking</div>
+            <div class="payment-method-desc">All major Indian banks supported</div>
+          </div>
+        </div>
+        <div class="netbanking-area" id="netbanking-area">
+          <label>Select your Bank</label>
+          <select class="netbanking-select" id="checkout-bank">
+            <option value="">-- Choose Bank --</option>
+            <option value="sbi">State Bank of India</option>
+            <option value="hdfc">HDFC Bank</option>
+            <option value="icici">ICICI Bank</option>
+            <option value="axis">Axis Bank</option>
+            <option value="kotak">Kotak Mahindra Bank</option>
+            <option value="bob">Bank of Baroda</option>
+            <option value="pnb">Punjab National Bank</option>
+            <option value="canara">Canara Bank</option>
+            <option value="union">Union Bank of India</option>
+            <option value="idbi">IDBI Bank</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="checkout-actions">
+        <button class="checkout-pay-btn" id="checkout-pay-btn" onclick="processPayment()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+          Pay Now
+        </button>
+        <button class="checkout-cancel-btn" onclick="showCancelConfirm()">Cancel Payment</button>
+      </div>
+
+      <div class="checkout-secure-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Secured with 256-bit encryption • Your data is safe
+      </div>
+    </div>
+
+    <!-- Payment Status Screens -->
+    <div class="payment-status-screen" id="status-success">
+      <div class="status-icon success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h3>Payment Successful!</h3>
+      <p class="status-msg">Thank you for your order. You will receive an order confirmation email shortly.</p>
+      <p class="status-order" id="status-success-order"></p>
+      <div class="status-actions">
+        <button class="status-btn-primary" onclick="closeCheckout(); goHome();">Continue Shopping</button>
+        <button class="status-btn-outline" onclick="closeCheckout()">Close</button>
+      </div>
+    </div>
+
+    <div class="payment-status-screen" id="status-failed">
+      <div class="status-icon failed">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      </div>
+      <h3>Payment Failed</h3>
+      <p class="status-msg">Your payment could not be processed. No amount has been deducted. Please try again or choose a different payment method.</p>
+      <p class="status-order" id="status-failed-order"></p>
+      <div class="status-actions">
+        <button class="status-btn-primary" onclick="retryPayment()">Retry Payment</button>
+        <button class="status-btn-outline" onclick="closeCheckout()">Go Back</button>
+      </div>
+    </div>
+
+    <div class="payment-status-screen" id="status-pending">
+      <div class="status-icon pending">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Payment Pending</h3>
+      <p class="status-msg">Your payment is being processed. This may take a few moments. Please do not refresh or close this page.</p>
+      <p class="status-order" id="status-pending-order"></p>
+      <div class="status-actions">
+        <button class="status-btn-primary" onclick="checkPaymentStatus()">Check Status</button>
+        <button class="status-btn-outline" onclick="closeCheckout()">Close</button>
+      </div>
+    </div>
+
+    <div class="payment-status-screen" id="status-cancelled">
+      <div class="status-icon cancelled">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      </div>
+      <h3>Payment Cancelled</h3>
+      <p class="status-msg">Your payment has been cancelled. No amount has been deducted from your account. Your items are still in your bag.</p>
+      <p class="status-order" id="status-cancelled-order"></p>
+      <div class="status-actions">
+        <button class="status-btn-primary" onclick="retryPayment()">Try Again</button>
+        <button class="status-btn-outline" onclick="closeCheckout(); goHome();">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CANCEL CONFIRMATION DIALOG ===== -->
+<div class="cancel-confirm-overlay" id="cancel-confirm-overlay">
+  <div class="cancel-confirm-box">
+    <div class="cancel-confirm-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <h3>Cancel Payment?</h3>
+    <p>Are you sure you want to cancel this payment? No amount will be deducted from your account.</p>
+    <div class="cancel-confirm-actions">
+      <button class="cancel-yes-btn" onclick="confirmCancelPayment()">Yes, Cancel Payment</button>
+      <button class="cancel-no-btn" onclick="closeCancelConfirm()">No, Continue Payment</button>
     </div>
   </div>
 </div>
@@ -3683,6 +4397,169 @@ function filterPageArrivals(filter, btn) {
   btn.parentElement.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
   renderPageArrivals(filter);
+}
+
+/* ===== CHECKOUT / PAYMENT GATEWAY ===== */
+let currentOrderId = '';
+let selectedPaymentMethod = 'upi';
+
+function generateOrderId() {
+  const num = Math.floor(100000 + Math.random() * 900000);
+  return 'ALK-' + num;
+}
+
+function openCheckout() {
+  if (cart.length === 0) { showToast('Your bag is empty'); return; }
+  closeCart();
+  currentOrderId = generateOrderId();
+  document.getElementById('checkout-order-id').textContent = currentOrderId;
+
+  // Populate order items
+  let subtotal = 0;
+  const itemsHtml = cart.map(item => {
+    const p = findProduct(item.id);
+    if (!p) return '';
+    const lineTotal = p.price * item.qty;
+    subtotal += lineTotal;
+    return '<div class="checkout-item">' +
+      '<span class="checkout-item-name">' + p.name + '</span>' +
+      '<span class="checkout-item-qty">x' + item.qty + '</span>' +
+      '<span class="checkout-item-price">₹' + lineTotal.toLocaleString('en-IN') + '</span>' +
+    '</div>';
+  }).join('');
+  document.getElementById('checkout-items').innerHTML = itemsHtml;
+
+  const shipping = subtotal >= 999 ? 0 : 99;
+  const total = subtotal + shipping;
+  document.getElementById('checkout-subtotal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+  document.getElementById('checkout-shipping').textContent = shipping === 0 ? 'FREE' : '₹' + shipping;
+  document.getElementById('checkout-total').textContent = '₹' + total.toLocaleString('en-IN');
+
+  // Reset form
+  selectPaymentMethod('upi');
+  showCheckoutView('checkout-form-view');
+  document.getElementById('checkout-overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckout() {
+  document.getElementById('checkout-overlay').classList.remove('show');
+  document.getElementById('cancel-confirm-overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function showCheckoutView(viewId) {
+  document.getElementById('checkout-form-view').style.display = 'none';
+  document.querySelectorAll('.payment-status-screen').forEach(s => s.classList.remove('show'));
+  const el = document.getElementById(viewId);
+  if (el.classList.contains('payment-status-screen')) el.classList.add('show');
+  else el.style.display = 'block';
+}
+
+function selectPaymentMethod(method) {
+  selectedPaymentMethod = method;
+  document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+  const upiArea = document.getElementById('upi-input-area');
+  const nbArea = document.getElementById('netbanking-area');
+
+  if (method === 'upi') {
+    document.querySelectorAll('.payment-method')[0].classList.add('selected');
+    upiArea.classList.add('show');
+    nbArea.classList.remove('show');
+  } else {
+    document.querySelectorAll('.payment-method')[1].classList.add('selected');
+    upiArea.classList.remove('show');
+    nbArea.classList.add('show');
+  }
+}
+
+function processPayment() {
+  // Validate delivery fields
+  const name = document.getElementById('checkout-name').value.trim();
+  const phone = document.getElementById('checkout-phone').value.trim();
+  const address = document.getElementById('checkout-address').value.trim();
+  const city = document.getElementById('checkout-city').value.trim();
+  const pincode = document.getElementById('checkout-pincode').value.trim();
+
+  if (!name || !phone || !address || !city || !pincode) {
+    showToast('Please fill in all delivery details');
+    return;
+  }
+
+  if (selectedPaymentMethod === 'upi') {
+    const upi = document.getElementById('checkout-upi').value.trim();
+    if (!upi || !upi.includes('@')) {
+      showToast('Please enter a valid UPI ID');
+      return;
+    }
+  } else {
+    const bank = document.getElementById('checkout-bank').value;
+    if (!bank) {
+      showToast('Please select your bank');
+      return;
+    }
+  }
+
+  // Simulate payment processing
+  const btn = document.getElementById('checkout-pay-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Processing...';
+
+  // Add spin animation if not exists
+  if (!document.getElementById('spin-style')) {
+    const style = document.createElement('style');
+    style.id = 'spin-style';
+    style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+    document.head.appendChild(style);
+  }
+
+  // Simulate random payment outcome (for prototype demo)
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg> Pay Now';
+
+    // 70% success, 15% pending, 15% failed for demo
+    const rnd = Math.random();
+    if (rnd < 0.7) {
+      showPaymentStatus('success');
+      cart = [];
+      updateCartUI();
+    } else if (rnd < 0.85) {
+      showPaymentStatus('pending');
+    } else {
+      showPaymentStatus('failed');
+    }
+  }, 2500);
+}
+
+function showPaymentStatus(status) {
+  const orderEl = document.getElementById('status-' + status + '-order');
+  if (orderEl) orderEl.textContent = 'Order: ' + currentOrderId;
+  showCheckoutView('status-' + status);
+}
+
+function retryPayment() {
+  showCheckoutView('checkout-form-view');
+}
+
+function checkPaymentStatus() {
+  // Simulate checking — resolve to success
+  showPaymentStatus('success');
+  cart = [];
+  updateCartUI();
+}
+
+function showCancelConfirm() {
+  document.getElementById('cancel-confirm-overlay').classList.add('show');
+}
+
+function closeCancelConfirm() {
+  document.getElementById('cancel-confirm-overlay').classList.remove('show');
+}
+
+function confirmCancelPayment() {
+  closeCancelConfirm();
+  showPaymentStatus('cancelled');
 }
 </script>
 
